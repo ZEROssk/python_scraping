@@ -7,8 +7,8 @@ from bs4 import BeautifulSoup
 
 imgURL = []
 
-inputURL = input('URL>')
-dirname = '/Users/zero/Desktop/' + input('file name ＞')
+inputURL = 'https://grand_order.wicurio.com/index.php?%E6%A6%82%E5%BF%B5%E7%A4%BC%E8%A3%85%EF%BC%92'
+dirname = '/Users/zero/Desktop/fgo/fgor301~600'
 
 os.mkdir(dirname)
 
@@ -29,6 +29,7 @@ for urllist in bsURL:
         continue
 
     name = urllist.find('a').text
+    #rank = urllist.find('td').text
     no = urllist.find('td').text
 
     if name == '?':
@@ -52,11 +53,12 @@ for urllist in bsURL:
 
     getimg = requests.get(iURL)
 
-    filePath = '{}/{}.jpg'.format(
+    filePath = '{}/No{} {}.jpg'.format(
         dirname,
+        no,
+        #rank,
         name.replace('/','／'),
     )
 
     with open(filePath, 'wb') as file:
         file.write(getimg.content)
-
